@@ -31,7 +31,7 @@ def blur( input, blur_sigma ):
 	assert( isinstance( input, np.ndarray) )
 	return ndimage.gaussian_filter(input, sigma=[blur_sigma,blur_sigma,0], truncate=3.0, mode='nearest' )
 
-def blur_noise_blur( input, blur_sigma, noise_sigma, jpeg_quality, intensity_range = (0,1) ):
+def blur_noise_jpeg( input, blur_sigma, noise_sigma, jpeg_quality, intensity_range = (0,1) ):
 	output = input
 	
 	if( blur_sigma > 0 ):

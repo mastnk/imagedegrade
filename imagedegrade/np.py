@@ -5,7 +5,7 @@ from PIL import Image
 from scipy import ndimage
 import numpy as np
 
-import degrade.im
+import imagedegrade.im
 
 
 def jpeg( input, jpeg_quality, intensity_range = (0,1) ):
@@ -14,13 +14,13 @@ def jpeg( input, jpeg_quality, intensity_range = (0,1) ):
 	if( input.dtype != np.uint8 ):
 		ar = ( input - intensity_range[0] ) / ( intensity_range[1] - intensity_range[0] ) * 255.
 		img = Image.fromarray( ar.astype(np.uint8) )
-		img = degrade.im.jpeg( img, jpeg_quality = jpeg_quality )
+		img = imagedegrade.im.jpeg( img, jpeg_quality = jpeg_quality )
 		ar = np.asarray( img, dtype=input.dtype )
 		return ar / 255.0 * ( intensity_range[1] - intensity_range[0] ) + intensity_range[0]
 		
 	else:
 		img = Image.fromarray( input )
-		img = degrade.im.jpeg( img, jpeg_quality = jpeg_quality )
+		img = imagedegrade.im.jpeg( img, jpeg_quality = jpeg_quality )
 		return np.asarray( img, dtype=input.dtype )
 
 def noise( input, noise_sigma ):

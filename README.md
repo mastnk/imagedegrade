@@ -6,14 +6,11 @@ It is a python package to degrade image data.
 ## Usage
 
 ### Import sample
-
-```import imagedegrade.np as degrade
-```
+`import imagedegrade.np as degrade`
 
 ### imagedegrade.np.blur( input, blur_sigma )
-
 Blur input data by Gaussian kernel.It simply calls:
-```scipy.ndimage.gaussian_filter(input, sigma=[blur_sigma,blur_sigma,0], truncate=3.0, mode='nearest' )```
+`scipy.ndimage.gaussian_filter(input, sigma=[blur_sigma,blur_sigma,0], truncate=3.0, mode='nearest' )`
 
 - **input** *numpy.ndarray*
 Three dimensional array of [height, width, channel]. Note that it should be three dimensional array even if it is a gray image data.
@@ -27,7 +24,7 @@ Blurred data.
 ### imagedegrade.np.noise( input, noise_sigma )
 
 Add Gaussian noise to input data. It simply calls:
-```input + numpy.random.normal(0., noise_sigma, input.shape )```
+`input + numpy.random.normal(0., noise_sigma, input.shape )`
 
 - **input** *numpy.ndarray*
 
@@ -52,12 +49,9 @@ Note that even if you specify 100, the output is included some JPEG compression 
 It specifys intensity range of the input image data.
 JPEG compression is caluclated in uint8. 
 Before JPEG compression, data is applied:
-```( data - intensity_range[0] ) / ( intensity_range[1] - intensity_range[0] ) * 255.0
-```
+`( data - intensity_range[0] ) / ( intensity_range[1] - intensity_range[0] ) * 255.0`
 After JPEG compression, data is applied:
-```data / 255.0 * ( intensity_range[1] - intensity_range[0] ) + intensity_range[0]
-```
-
+`data / 255.0 * ( intensity_range[1] - intensity_range[0] ) + intensity_range[0]`
 If dtype of input is uint8, those calculation is not applied.
 
 - **output** *numpy.ndarray*
@@ -70,8 +64,7 @@ It sequentially applys blur, noise, and jpeg compression distortion. Please chec
 
 ## Install
 
-```% pip install git+https://github.com/mastnk/imagedegrade
-```
+`% pip install git+https://github.com/mastnk/imagedegrade`
 
 ## Author
 

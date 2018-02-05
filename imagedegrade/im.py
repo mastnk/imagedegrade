@@ -9,9 +9,9 @@ except ImportError:
 	from io import BytesIO as io_memory
 
 from PIL import Image
-import numpy
+import numpy as np
 
-import np
+import degrade.np
 
 def jpeg( input, jpeg_quality ):
 	assert( isinstance(input, Image.Image) )
@@ -24,13 +24,13 @@ def jpeg( input, jpeg_quality ):
 def noise( input, noise_sigma ):
 	assert( isinstance(input, Image.Image) )
 
-	array = numpy.asarray( input )
-	array = np.noise( array, noise_sigma )
+	array = np.asarray( input )
+	array = degrade.np.noise( array, noise_sigma )
 	return Image.fromarray( array )
 
 def blur( input, blur_sigma ):
 	assert( isinstance(input, Image.Image) )
 
-	array = numpy.asarray( input )
-	array = np.blur( array, blur_sigma )
+	array = np.asarray( input )
+	array = degrade.np.blur( array, blur_sigma )
 	return Image.fromarray( array )

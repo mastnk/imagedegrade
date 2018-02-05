@@ -4,13 +4,11 @@
 import unittest
 
 import sys
-sys.path.append('../')
-sys.path.append('../degrade')
 
-import degrade.im
-import degrade.np
+import imagedegrade.im
+import imagedegrade.np
 
-import numpy
+import numpy as np
 from PIL import Image, ImageDraw
 
 import os
@@ -47,35 +45,35 @@ class test_ImageShffleRand( unittest.TestCase ):
 		im0 = Image.open( filename )
 		#os.remove( filename )
 		
-		im1 = degrade.im.jpeg( self.im, jpeg_quality = q )
+		im1 = imagedegrade.im.jpeg( self.im, jpeg_quality = q )
 		
-		np0 = numpy.asarray( im0 )
-		np1 = numpy.asarray( im1 )
+		np0 = np.asarray( im0 )
+		np1 = np.asarray( im1 )
 		
 		self.assertTrue( ( np0 == np1 ).all() )
 		
-		np2 = degrade.np.jpeg( self.np, jpeg_quality = q )
+		np2 = imagedegrade.np.jpeg( self.np, jpeg_quality = q )
 		self.assertTrue( ( np0 == np2 ).all() )
 
 	def test_noise(self):
-		np0 = self.np.astype(numpy.float32)
-		np1 = degrade.np.noise( np0, noise_sigma = 50 )
-		np1 = numpy.clip(np1, 0, 255)
-		Image.fromarray( np1.astype(numpy.uint8) ).save('__tests_noise.png')
+		np0 = self.np.astype(np.float32)
+		np1 = imagedegrade.np.noise( np0, noise_sigma = 50 )
+		np1 = np.clip(np1, 0, 255)
+		Image.fromarray( np1.astype(np.uint8) ).save('__tests_noise.png')
 
 	def test_blur(self):
-		np0 = self.np.astype(numpy.float32)
-		np1 = degrade.np.blur( np0, blur_sigma = 5 )
-		np1 = numpy.clip(np1, 0, 255)
-		Image.fromarray( np1.astype(numpy.uint8) ).save('__tests_color_blur.png')
+		np0 = self.np.astype(np.float32)
+		np1 = imagedegrade.np.blur( np0, blur_sigma = 5 )
+		np1 = np.clip(np1, 0, 255)
+		Image.fromarray( np1.astype(np.uint8) ).save('__tests_color_blur.png')
 
-		np0 = self.np.astype(numpy.float32)
-		np0 = numpy.mean( np0, axis=2, keepdims=True )
-		np1 = degrade.np.blur( np0, blur_sigma = 5 )
-		np1 = numpy.clip(np1, 0, 255)
+		np0 = self.np.astype(np.float32)
+		np0 = np.mean( np0, axis=2, keepdims=True )
+		np1 = imagedegrade.np.blur( np0, blur_sigma = 5 )
+		np1 = np.clip(np1, 0, 255)
 		
-		np1 = numpy.reshape( np1, (np1.shape[0], np1.shape[1]) )
-		Image.fromarray( np1.astype(numpy.uint8) ).save('__tests_gray_blur.png')
+		np1 = np.reshape( np1, (np1.shape[0], np1.shape[1]) )
+		Image.fromarray( np1.astype(np.uint8) ).save('__tests_gray_blur.png')
 
 
 

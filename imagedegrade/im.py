@@ -14,7 +14,9 @@ import numpy as np
 import imagedegrade.np
 
 def jpeg( input, jpeg_quality ):
-	assert( isinstance(input, Image.Image) )
+	if( not isinstance(input, Image.Image) ):
+		msg = 'The input should be Image.Image.'
+		raise TypeError( msg )
 
 	buffer = io_memory()
 	input.save( buffer, 'JPEG', quality = jpeg_quality )
@@ -22,14 +24,18 @@ def jpeg( input, jpeg_quality ):
 	return Image.open( buffer )
 
 def noise( input, noise_sigma ):
-	assert( isinstance(input, Image.Image) )
+	if( not isinstance(input, Image.Image) ):
+		msg = 'The input should be Image.Image.'
+		raise TypeError( msg )
 
 	array = np.asarray( input )
 	array = imagedegrade.np.noise( array, noise_sigma )
 	return Image.fromarray( array )
 
 def blur( input, blur_sigma ):
-	assert( isinstance(input, Image.Image) )
+	if( not isinstance(input, Image.Image) ):
+		msg = 'The input should be Image.Image.'
+		raise TypeError( msg )
 
 	array = np.asarray( input )
 	array = imagedegrade.np.blur( array, blur_sigma )

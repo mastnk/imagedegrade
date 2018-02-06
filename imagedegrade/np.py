@@ -9,7 +9,9 @@ import imagedegrade.im
 
 
 def jpeg( input, jpeg_quality, intensity_range = (0,1) ):
-	assert( isinstance( input, np.ndarray) )
+	if( not isinstance( input, np.ndarray) ):
+		msg = 'The input should be numpy.ndarray.'
+		raise TypeError( msg )
 	
 	if( input.dtype != np.uint8 ):
 		ar = ( input - intensity_range[0] ) / ( intensity_range[1] - intensity_range[0] ) * 255.
@@ -24,14 +26,21 @@ def jpeg( input, jpeg_quality, intensity_range = (0,1) ):
 		return np.asarray( img, dtype=input.dtype )
 
 def noise( input, noise_sigma ):
-	assert( isinstance( input, np.ndarray) )
+	if( not isinstance( input, np.ndarray) ):
+		msg = 'The input should be numpy.ndarray.'
+		raise TypeError( msg )
 	return input + np.random.normal(0., noise_sigma, input.shape )
 
 def blur( input, blur_sigma ):
-	assert( isinstance( input, np.ndarray) )
+	if( not isinstance( input, np.ndarray) ):
+		msg = 'The input should be numpy.ndarray.'
+		raise TypeError( msg )
 	return ndimage.gaussian_filter(input, sigma=[blur_sigma,blur_sigma,0], truncate=3.0, mode='nearest' )
 
 def blur_noise_jpeg( input, blur_sigma, noise_sigma, jpeg_quality, intensity_range = (0,1) ):
+	if( not isinstance( input, np.ndarray) ):
+		msg = 'The input should be numpy.ndarray.'
+		raise TypeError( msg )
 	output = input
 	
 	if( blur_sigma > 0 ):

@@ -16,7 +16,7 @@ import glob
 
 from scipy import misc
 
-class test_ImageShffleRand( unittest.TestCase ):
+class test( unittest.TestCase ):
 ###################################################################
 	@classmethod
 	def setUpClass(cls): # it is called before test starting
@@ -80,7 +80,7 @@ class test_ImageShffleRand( unittest.TestCase ):
 ###################################################################
 	def suite():
 		suite = unittest.TestSuite()
-		suite.addTests(unittest.makeSuite(test_ImageShffleRand))
+		suite.addTests(unittest.makeSuite(test))
 		return suite
   
 if( __name__ == '__main__' ):

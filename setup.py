@@ -5,10 +5,10 @@ from setuptools import setup, find_packages
 
 setup(
 	name= 'imagedegrade', # Application name:
-	version= '0.1.5', # Version number
+	version= '0.1.6', # Version number
 
 	author= 'Masayuki Tanaka', # Author name
-	author_email= 'mastnk@gmail', # Author mail	
+	author_email= 'mastnk@gmail.com', # Author mail	
 
 	url='https://github.com/mastnk/imagedegrade', # Details
 	description='Image degradation library for python.', # short description

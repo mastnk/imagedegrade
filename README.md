@@ -34,6 +34,22 @@ It specifies the standard deviaion of Gaussian noise.
 - **output** *numpy.ndarray*
 Noisy data.
 
+### imagedegrade.np.saltpepper( input, p, intensity_range = (0,1) )
+
+Add Salt-and-Pepper noise to input data. 
+
+- **input** *numpy.ndarray*
+
+- **p** *float*
+It specifies the probability of the intensity_range[0] and intensity_range[1].
+
+- **intensity_range** *tuple of floats*
+It specifys intensity range of the input image data.
+Actually, intensity_range is the values for the pepper and the salt.
+
+- **output** *numpy.ndarray*
+Noisy data.
+
 ### imagedegrade.np.jpeg( input, jpeg_quality, intensity_range = (0,1) )
 
 Add JPEG compression distortion. Gray image version is not debugged.

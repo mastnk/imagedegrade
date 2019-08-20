@@ -41,18 +41,18 @@ class tests( unittest.TestCase ):
     def test_jpg(self):
         q = 5
         filename = '__tests__jpg.jpg'
-        self.im.save( filename, quality = q )
+        self.im.save( filename, quality = q, subsampling='4:4:4' )
         im0 = Image.open( filename )
         #os.remove( filename )
 
-        im1 = imagedegrade.im.jpeg( self.im, jpeg_quality = q )
+        im1 = imagedegrade.im.jpeg( self.im, jpeg_quality = q, subsampling='4:4:4' )
 
         np0 = np.asarray( im0 )
         np1 = np.asarray( im1 )
 
         self.assertTrue( ( np0 == np1 ).all() )
 
-        np2 = imagedegrade.np.jpeg( self.np, jpeg_quality = q )
+        np2 = imagedegrade.np.jpeg( self.np, jpeg_quality = q, subsampling='4:4:4' )
         self.assertTrue( ( np0 == np2 ).all() )
 
     def test_noise(self):

@@ -13,13 +13,13 @@ import numpy as np
 
 import imagedegrade.np
 
-def jpeg( input, jpeg_quality ):
+def jpeg( input, jpeg_quality, **kwargs ):
     if( not isinstance(input, Image.Image) ):
         msg = 'The input should be Image.Image.'
         raise TypeError( msg )
 
     buffer = io_memory()
-    input.save( buffer, 'JPEG', quality = jpeg_quality )
+    input.save( buffer, 'JPEG', quality = jpeg_quality, **kwargs )
     buffer.seek(0)
     return Image.open( buffer )
 

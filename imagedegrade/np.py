@@ -8,7 +8,7 @@ import numpy as np
 import imagedegrade.im
 
 
-def jpeg( input, jpeg_quality, intensity_range = (0,1) ):
+def jpeg( input, jpeg_quality, intensity_range = (0,1), **kwargs ):
     if( not isinstance( input, np.ndarray) ):
         msg = 'The input should be numpy.ndarray.'
         raise TypeError( msg )
@@ -16,13 +16,13 @@ def jpeg( input, jpeg_quality, intensity_range = (0,1) ):
     if( input.dtype != np.uint8 ):
         ar = ( input - intensity_range[0] ) / ( intensity_range[1] - intensity_range[0] ) * 255.
         img = Image.fromarray( ar.astype(np.uint8) )
-        img = imagedegrade.im.jpeg( img, jpeg_quality = jpeg_quality )
+        img = imagedegrade.im.jpeg( img, jpeg_quality = jpeg_quality, **kwargs )
         ar = np.asarray( img, dtype=input.dtype )
         return ar / 255.0 * ( intensity_range[1] - intensity_range[0] ) + intensity_range[0]
 
     else:
         img = Image.fromarray( input )
-        img = imagedegrade.im.jpeg( img, jpeg_quality = jpeg_quality )
+        img = imagedegrade.im.jpeg( img, jpeg_quality = jpeg_quality, **kwargs )
         return np.asarray( img, dtype=input.dtype )
 
 def noise( input, noise_sigma ):

@@ -50,7 +50,7 @@ Actually, intensity_range is the values for the pepper and the salt.
 - **output** *numpy.ndarray*
 Noisy data.
 
-### imagedegrade.np.jpeg( input, jpeg_quality, intensity_range = (0,1) )
+### imagedegrade.np.jpeg( input, jpeg_quality, intensity_range = (0,1), **kwargs )
 
 Add JPEG compression distortion. Gray image version is not debugged.
 
@@ -69,6 +69,9 @@ Before JPEG compression, data is applied:
 After JPEG compression, data is applied:
 `data / 255.0 * ( intensity_range[1] - intensity_range[0] ) + intensity_range[0]`
 If dtype of input is uint8, those calculation is not applied.
+
+- ** ** 
+
 
 - **output** *numpy.ndarray*
 The image data with JPEG compression distortion.

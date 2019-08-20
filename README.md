@@ -63,6 +63,7 @@ Note that even if you specify 100, the output is included some JPEG compression 
 
 - **intensity_range** *tuple of floats*
 It specifys intensity range of the input image data.
+
 JPEG compression is caluclated in uint8. 
 Before JPEG compression, data is applied:
 `( data - intensity_range[0] ) / ( intensity_range[1] - intensity_range[0] ) * 255.0`

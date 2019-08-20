@@ -50,7 +50,7 @@ Actually, intensity_range is the values for the pepper and the salt.
 - **output** *numpy.ndarray*
 Noisy data.
 
-### imagedegrade.np.jpeg( input, jpeg_quality, intensity_range = (0,1), **kwargs )
+### imagedegrade.np.jpeg( input, jpeg_quality, intensity_range = (0,1), \*\*kwargs )
 
 Add JPEG compression distortion. Gray image version is not debugged.
 
@@ -63,6 +63,7 @@ Note that even if you specify 100, the output is included some JPEG compression 
 
 - **intensity_range** *tuple of floats*
 It specifys intensity range of the input image data.
+
 JPEG compression is caluclated in uint8. 
 Before JPEG compression, data is applied:
 `( data - intensity_range[0] ) / ( intensity_range[1] - intensity_range[0] ) * 255.0`
@@ -70,8 +71,8 @@ After JPEG compression, data is applied:
 `data / 255.0 * ( intensity_range[1] - intensity_range[0] ) + intensity_range[0]`
 If dtype of input is uint8, those calculation is not applied.
 
-- ** ** 
-
+- **\*\*kwargs**
+Options for the JPEG. For details, plesae visit [the pillow document](https://pillow.readthedocs.io/en/5.1.x/handbook/image-file-formats.html#jpeg).
 
 - **output** *numpy.ndarray*
 The image data with JPEG compression distortion.

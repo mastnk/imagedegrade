@@ -55,7 +55,7 @@ Noisy data.
 Add JPEG compression distortion. Gray image version is not debugged.
 
 - **input** *numpy.ndarray*
-Three dimensional array of [height, width, channel]. Note that it should be three dimensional array even if it is a gray image data.
+Three dimensional array of \[height, width, channel\]. Note that it should be three dimensional array even if it is a gray image data.
 
 - **jpeg_quality** *int*
 It specifys jpeg quality. The range is 1 to 100. 
@@ -66,9 +66,13 @@ It specifys intensity range of the input image data.
 
 JPEG compression is caluclated in uint8. 
 Before JPEG compression, data is applied:
-`( data - intensity_range[0] ) / ( intensity_range[1] - intensity_range[0] ) * 255.0`
+
+```( data - intensity_range[0] ) / ( intensity_range[1] - intensity_range[0] ) * 255.0```
+
 After JPEG compression, data is applied:
-`data / 255.0 * ( intensity_range[1] - intensity_range[0] ) + intensity_range[0]`
+
+```data / 255.0 * ( intensity_range[1] - intensity_range[0] ) + intensity_range[0]```
+
 If dtype of input is uint8, those calculation is not applied.
 
 - **\*\*kwargs**

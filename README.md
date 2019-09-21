@@ -6,7 +6,7 @@ It is a python package to degrade image data.
 ## Usage
 
 ### Import sample
-`import imagedegrade.np as degrade`
+`from imagedegrade import np as degrade`
 
 ### imagedegrade.np.blur( input, blur_sigma )
 Blur input data by Gaussian kernel.It simply calls:

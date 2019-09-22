@@ -88,7 +88,11 @@ It sequentially applys blur, noise, and jpeg compression distortion. Please chec
 
 ## Install
 
-`% pip install git+https://github.com/mastnk/imagedegrade`
+```% pip install imagedegrade```
+
+or
+
+```% pip install git+https://github.com/mastnk/imagedegrade```
 
 ## Author
 

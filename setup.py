@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name= 'imagedegrade', # Application name:
-    version= '0.2.1', # Version number
+    version= '0.2.2', # Version number
 
     author= 'Masayuki Tanaka', # Author name
     author_email= 'mastnk@gmail.com', # Author mail
@@ -18,7 +18,7 @@ setup(
     ],
 
     include_package_data=False, # Include additional files into the package
-    packages=find_packages(),
+    packages=find_packages(exclude=('tests')),
 
     test_suite = 'tests',
 

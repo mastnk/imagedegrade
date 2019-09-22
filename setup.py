@@ -23,10 +23,11 @@ setup(
     test_suite = 'tests',
 
     classifiers=[
+        'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.6',
-        'License :: OSI Approved :: MIT',
     ]
 )
+
 
 # uninstall
 # % python setup.py install --record installed_files

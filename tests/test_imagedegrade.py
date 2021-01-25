@@ -24,26 +24,28 @@ class tests( unittest.TestCase ):
 
     @classmethod
     def tearDownClass(cls): # it is called before test ending
-        #for file in glob.glob('__tests__*'):
+        #for file in glob.glob('__test_imagedegrade__*'):
         #   os.remove(file)
         pass
 
     def setUp(self): # it is called before each test
         self.np = misc.face()
         self.im = Image.fromarray( self.np )
-        self.im.save( '__tests__face.png' )
+        self.im.save( '__test_imagedegrade__face.png' )
         pass
 
     def tearDown(self): # it is called after each test
-        pass
+        test_files = glob.glob( '__test_imagedegrade__*' )
+        for test_file in test_files:
+            os.remove( test_file )
+
 
 ###################################################################
     def test_jpg(self):
         q = 5
-        filename = '__tests__jpg.jpg'
+        filename = '__test_imagedegrade__jpg.jpg'
         self.im.save( filename, quality = q, subsampling='4:4:4' )
         im0 = Image.open( filename )
-        #os.remove( filename )
 
         im1 = imagedegrade_im.jpeg( self.im, jpeg_quality = q, subsampling='4:4:4' )
 
@@ -59,19 +61,26 @@ class tests( unittest.TestCase ):
         np0 = self.np.astype(np.float32)
         np1 = imagedegrade_np.noise( np0, noise_sigma = 50 )
         np1 = np.clip(np1, 0, 255)
-        Image.fromarray( np1.astype(np.uint8) ).save('__tests_noise.png')
+        Image.fromarray( np1.astype(np.uint8) ).save('__test_imagedegrade__np_noise.png')
+
+        im1 = imagedegrade_im.noise( self.im, noise_sigma = 30 )
+        im1.save('__test_imagedegrade__im_noise.png')
 
     def test_saltpepper(self):
         np0 = self.np.astype(np.float32)
         np1 = imagedegrade_np.saltpepper( np0, 0.01, (0,255) )
         np1 = np.clip(np1, 0, 255)
-        Image.fromarray( np1.astype(np.uint8) ).save('__tests_saltpepper.png')
+        Image.fromarray( np1.astype(np.uint8) ).save('__test_imagedegrade__np_saltpepper.png')
+
+        im1 = imagedegrade_im.saltpepper( self.im, 0.05 )
+        im1.save('__test_imagedegrade__im_saltpepper.png')
+
 
     def test_blur(self):
         np0 = self.np.astype(np.float32)
         np1 = imagedegrade_np.blur( np0, blur_sigma = 5 )
         np1 = np.clip(np1, 0, 255)
-        Image.fromarray( np1.astype(np.uint8) ).save('__tests_color_blur.png')
+        Image.fromarray( np1.astype(np.uint8) ).save('__test_imagedegrade__np_color_blur.png')
 
         np0 = self.np.astype(np.float32)
         np0 = np.mean( np0, axis=2, keepdims=True )
@@ -79,8 +88,10 @@ class tests( unittest.TestCase ):
         np1 = np.clip(np1, 0, 255)
 
         np1 = np.reshape( np1, (np1.shape[0], np1.shape[1]) )
-        Image.fromarray( np1.astype(np.uint8) ).save('__tests_gray_blur.png')
+        Image.fromarray( np1.astype(np.uint8) ).save('__test_imagedegrade__np_gray_blur.png')
 
+        im1 = imagedegrade_im.blur( self.im, blur_sigma = 3 )
+        im1.save('__test_imagedegrade__np_color_blur.png')
 
 
 ###################################################################

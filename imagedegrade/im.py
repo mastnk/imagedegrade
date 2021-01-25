@@ -13,6 +13,14 @@ import numpy as np
 
 import imagedegrade.np
 
+def im2np( im ):
+    np = np.asarray( np ).astype( np.float32 )
+    np.flags.writeable = True
+    return np
+
+def np2im( np ):
+    return Image.fromarray( np.uint8(np.clip(0,255)) )
+
 def jpeg( input, jpeg_quality, **kwargs ):
     if( not isinstance(input, Image.Image) ):
         msg = 'The input should be Image.Image.'
@@ -28,18 +36,21 @@ def noise( input, noise_sigma ):
         msg = 'The input should be Image.Image.'
         raise TypeError( msg )
 
-    array = np.asarray( input )
-    array = imagedegrade.np.noise( array, noise_sigma )
-    return Image.fromarray( array )
+    array = np.asarray( input ).astype( np.float32 )
+    array.flags.writeable = True
 
-def saltpepper( input, p, intensity_range = (0,1) ):
+    array = imagedegrade.np.noise( array, noise_sigma )
+
+    return Image.fromarray( np.uint8(array) )
+
+def saltpepper( input, p ):
     if( not isinstance(input, Image.Image) ):
         msg = 'The input should be Image.Image.'
         raise TypeError( msg )
 
     array = np.asarray( input )
-    array = imagedegrade.np.saltpepper( array, p, intensity_range )
-    return Image.fromarray( array )
+    array = imagedegrade.np.saltpepper( array, p, (0,255) )
+    return Image.fromarray( np.uint8(array) )
 
 def blur( input, blur_sigma ):
     if( not isinstance(input, Image.Image) ):
@@ -48,4 +59,4 @@ def blur( input, blur_sigma ):
 
     array = np.asarray( input )
     array = imagedegrade.np.blur( array, blur_sigma )
-    return Image.fromarray( array )
+    return Image.fromarray( np.uint8(array) )
